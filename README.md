@@ -1,8 +1,5 @@
 # 基于机器学习的致密双星并合引力波信号搜寻
 
-本仓库内容对应太极实验室 2026 年度“大学生创新实践训练计划”
-（一）：基于机器学习的致密双星并合引力波信号搜寻
-
 ## 1. 项目概述
 
 本项目的任务是：给定一段 LIGO 探测器的时间序列数据，判断其中**是否包含致密双星旋近阶段的引力波信号**。这是一个二分类问题——区分有信号和纯噪声。**另外，所有的 notebook 都是已经运行过且保存完结果的，如要查看任务完成情况，可直接查看 notebook**
@@ -68,7 +65,7 @@ BBH_to_BNS/
 
 2. **波形模板生成**：
    - **BBH**：代码通过 LALSimulation 接口生成 h₊(t) 和 h×(t)；底层所用的 BBH 近似模型为 `IMRPhenomD`。IMRPhenomD 是一个面向 nonprecessing/aligned-spin black-hole binaries 的频域 phenomenological inspiral-merger-ringdown 模型（Khan et al. 2016, Phys. Rev. D 93, 044007）。
-   - **BNS**：使用 `IMRPhenomD_NRTidalv2`（Dietrich et al. 2019, Phys. Rev. D 99, 024029），即在 BBH 基础模型上加入由数值相对论标定的潮汐修正。潮汐参数 Λ₁、Λ₂ 由 LALSimulation 的 TOV 相关接口数值计算；实现中使用的 EOS 名称为 `APR4_EPP`，它是 LALSuite 支持的命名 EOS。若追溯其 APR/APR4 背景，可分别参考 Akmal, Pandharipande & Ravenhall (1998, Phys. Rev. C 58, 1804) 与 Read et al. (2009, Phys. Rev. D 79, 124032)。具体计算链为：EOS → TOV 积分 → R(m), k₂(m) → Λ = (2/3) k₂ C⁻⁵；关于 k₂ 与潮汐形变的物理背景，可参考 Hinderer (2008, ApJ 677, 1216) 以及 Flanagan & Hinderer (2008, Phys. Rev. D 77, 021502)。
+   - **BNS**：使用 `IMRPhenomD_NRTidalv2`(Dietrich et al. 2019, Phys. Rev. D 100, 044003)，即在 BBH 基础模型上加入由数值相对论标定的潮汐修正。潮汐参数 Λ₁、Λ₂ 由 LALSimulation 的 TOV 相关接口数值计算；实现中使用的 EOS 名称为 `APR4_EPP`，它是 LALSuite 支持的命名 EOS。若追溯其 APR/APR4 背景，可分别参考 Akmal, Pandharipande & Ravenhall (1998, Phys. Rev. C 58, 1804) 与 Read et al. (2009, Phys. Rev. D 79, 124032)。具体计算链为：EOS → TOV 积分 → R(m), k₂(m) → Λ = (2/3) k₂ C⁻⁵；关于 k₂ 与潮汐形变的物理背景，可参考 Hinderer (2008, ApJ 677, 1216) 以及 Flanagan & Hinderer (2008, Phys. Rev. D 77, 021502)。
 
 3. **探测器响应**：将 h₊ 和 h× 投影到具体探测器（H1/L1），施加天线函数 F₊、F× 和光程时延。
 
